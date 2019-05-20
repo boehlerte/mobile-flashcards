@@ -7,6 +7,9 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity
 } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
+import { handleAddDeck } from '../actions';
 
 class AddDeck extends Component {
     state = {
@@ -14,7 +17,15 @@ class AddDeck extends Component {
     }
 
     onCreateDeck = () => {
-        console.log('submitted', this.state.deckTitle);
+        this.props.dispatch(handleAddDeck(this.state.deckTitle))
+        this.setState({deckTitle: ''})
+        this.toDeckListView()
+    }
+
+    toDeckListView = () => {
+        this.props.navigation.dispatch(NavigationActions.back({
+            key: 'AddDeck'
+        }))
     }
 
     render() {
@@ -75,4 +86,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AddDeck
+export default connect()(AddDeck)

@@ -8,6 +8,7 @@ import reducer from './reducers'
 import DeckListView from './components/DeckListView'
 import AddCard from './components/AddCard'
 import AddDeck from './components/AddDeck'
+import middleware from './middleware';
 
 const Tabs = createBottomTabNavigator(
   {
@@ -49,7 +50,7 @@ const Tabs = createBottomTabNavigator(
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(reducer, middleware)}>
         <View style={styles.container}>
           <Tabs />
         </View>
