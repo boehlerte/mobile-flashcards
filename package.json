@@ -13,7 +13,8 @@
     "react-native-tab-view": "github:react-navigation/react-native-tab-view",
     "react-navigation": "^2.0.4",
     "react-redux": "6.0.1",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
