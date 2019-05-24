@@ -7,8 +7,9 @@ import { Ionicons, Entypo } from '@expo/vector-icons'
 import reducer from './reducers'
 import DeckListView from './components/DeckListView'
 import AddCard from './components/AddCard'
+import DeckView from './components/DeckView'
 import AddDeck from './components/AddDeck'
-import middleware from './middleware';
+import middleware from './middleware'
 
 const Tabs = createBottomTabNavigator(
   {
@@ -47,12 +48,27 @@ const Tabs = createBottomTabNavigator(
   }
 )
 
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'purple',
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>
         <View style={styles.container}>
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     );
@@ -61,6 +77,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
 });

@@ -19,13 +19,14 @@ class AddDeck extends Component {
     onCreateDeck = () => {
         this.props.dispatch(handleAddDeck(this.state.deckTitle))
         this.setState({deckTitle: ''})
-        this.toDeckListView()
+        this.toDeckView()
     }
 
-    toDeckListView = () => {
-        this.props.navigation.dispatch(NavigationActions.back({
-            key: 'AddDeck'
-        }))
+    toDeckView = () => {
+        this.props.navigation.navigate(
+            'DeckView',
+            { deckId: this.state.deckTitle }
+        )
     }
 
     render() {
@@ -82,7 +83,11 @@ const styles = StyleSheet.create({
     submitBtnText: {
         color: 'white',
         fontSize: 20,
-        padding: 10
+        textAlign: 'center',
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 30,
+        paddingRight: 30,
     }
 })
 
