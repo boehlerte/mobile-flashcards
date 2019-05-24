@@ -1,4 +1,4 @@
-import { saveDeckTitle } from "../utils/api";
+import { saveDeckTitle, addCardToDeck } from '../utils/api'
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
@@ -25,11 +25,21 @@ export function handleAddDeck (deckTitle) {
     }
 }
 
-// export function addCard ({card, deckId}) {
-//     return {
-//         type: ADD_CARD,
-//         card,
-//         deckId
-//     }
-// }
+function addCard (card, deckId) {
+    return {
+        type: ADD_CARD,
+        card,
+        deckId
+    }
+}
+
+export function handleAddCard (card, deckId) {
+    console.log('card', card)
+    console.log('deckId', deckId)
+    return (dispatch) => {
+        const newData = addCardToDeck(card, deckId)
+        console.log(newData)
+        dispatch(addCard(card, deckId))
+    }
+}
 

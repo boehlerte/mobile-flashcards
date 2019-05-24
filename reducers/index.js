@@ -12,11 +12,14 @@ function decks (state = {}, action) {
                 ...state,
                 [action.deck.title]: action.deck
             }
-        // case ADD_CARD :
-        //     return {
-        //         ...screen,
-                
-        //     }
+        case ADD_CARD :
+            return {
+                ...state,
+                [action.deckId]: {
+                    ...state[action.deckId],
+                    questions: [...state[action.deckId].questions, action.card]
+                }
+            }
         default :
             return state
     }
