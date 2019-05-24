@@ -7,7 +7,6 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity
 } from 'react-native'
-import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { handleAddDeck } from '../actions';
 
