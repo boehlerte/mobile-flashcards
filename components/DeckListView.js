@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { receiveDecks } from '../actions';
+import { getDecks } from '../utils/api';
 
 class DeckListView extends Component {
+
+    componentDidMount = () => {
+        getDecks()
+            .then((decks) => this.props.dispatch(receiveDecks(decks)))
+    }
+
     toDeckView = (deckId) => {
         this.props.navigation.navigate(
             'DeckView',
@@ -35,10 +43,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginTop: 30,
     },
     deckHeader: {
         fontSize: 30,
+        marginTop: 30,
     },
     deckSubHeader: {
         fontSize: 17,
@@ -46,6 +54,7 @@ const styles = StyleSheet.create({
     },
     noDecksText: {
         fontSize: 20,
+        marginTop: 30,
     }
 })
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { handleDeleteDeck, handleAddDeck } from '../actions';
 
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -22,26 +23,33 @@ class DeckView extends Component {
         // TODO: go to quiz view
     }
 
-    deleteDeck = () => {
-        // TODO: delete deck from view
-        // go back to deck list view
+    deleteDeck = (deckId) => {
+        this.props.dispatch(handleDeleteDeck(deckId))
+        this.props.navigation.navigate(
+            'Home',
+        )
     }
 
     render() {
         const { deck, numCards } = this.props
         return (
-            <View style={styles.container}>
-                <Text style={styles.header}>{deck.title}</Text>
-                <Text style={styles.subHeader}>{numCards} cards</Text>
-                <TouchableOpacity style={[styles.btn, {marginTop: 100}]} onPress={() => this.addCard(deck.title)}>
-                    <Text style={styles.btnText}>Add Card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.btn, styles.startQuizBtn]}>
-                    <Text style={[styles.btnText, styles.startQuizBtnText]}>Start Quiz</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={styles.deleteBtnText}>Delete Deck</Text>
-                </TouchableOpacity>
+            <View style={{ flex:1 }}>
+                { deck 
+                    ?   <View style={styles.container}>
+                            <Text style={styles.header}>{deck.title}</Text>
+                            <Text style={styles.subHeader}>{numCards} cards</Text>
+                            <TouchableOpacity style={[styles.btn, {marginTop: 100}]} onPress={() => this.addCard(deck.title)}>
+                                <Text style={styles.btnText}>Add Card</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={[styles.btn, styles.startQuizBtn]}>
+                                <Text style={[styles.btnText, styles.startQuizBtnText]}>Start Quiz</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.deleteDeck(deck.title)}>
+                                <Text style={styles.deleteBtnText}>Delete Deck</Text>
+                            </TouchableOpacity>
+                        </View>
+                    : <Text>Deck Deleted</Text>
+                }
             </View>
         )
     }
@@ -49,10 +57,14 @@ class DeckView extends Component {
 
 function mapStateToProps(decks, { navigation }) {
     const { deckId } = navigation.state.params;
-    return {
-        deck: decks[deckId],
-        numCards: decks[deckId].questions.length
+    const numDecks = Object.keys(decks).length;
+    if(numDecks > 0 && decks[deckId]) {
+        return{
+            deck: decks[deckId],
+            numCards: decks[deckId].questions.length
+        }
     }
+    return {}
 }
 
 const styles = StyleSheet.create({

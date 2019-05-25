@@ -8,8 +8,8 @@ import {
     TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
-import { addCardToDeck } from '../utils/api';
-import { handleAddCard } from '../actions';
+import { handleAddCard } from '../actions'
+import { StackActions } from 'react-navigation'
 
 class AddCard extends Component {
     static navigationOptions = () => {
@@ -31,6 +31,7 @@ class AddCard extends Component {
             answer,
         }
         this.props.dispatch(handleAddCard(card, deckId))
+        this.props.navigation.dispatch(StackActions.pop({n: 1}))
     }
 
     render() {
