@@ -6,7 +6,6 @@ import { handleDeleteDeck, handleAddDeck } from '../actions';
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
         const { deckId } = navigation.state.params
-
         return {
             title: deckId
         }
@@ -19,8 +18,11 @@ class DeckView extends Component {
         )
     }
 
-    startQuiz = () => {
-        // TODO: go to quiz view
+    startQuiz = (deckId) => {
+        this.props.navigation.navigate(
+            'QuizView',
+            { deckId },
+        )
     }
 
     deleteDeck = (deckId) => {
@@ -41,7 +43,7 @@ class DeckView extends Component {
                             <TouchableOpacity style={[styles.btn, {marginTop: 100}]} onPress={() => this.addCard(deck.title)}>
                                 <Text style={styles.btnText}>Add Card</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={[styles.btn, styles.startQuizBtn]}>
+                            <TouchableOpacity style={[styles.btn, styles.startQuizBtn]} onPress={() => this.startQuiz(deck.title)}>
                                 <Text style={[styles.btnText, styles.startQuizBtnText]}>Start Quiz</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this.deleteDeck(deck.title)}>

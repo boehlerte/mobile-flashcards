@@ -9,6 +9,7 @@ import DeckListView from './components/DeckListView'
 import AddCard from './components/AddCard'
 import DeckView from './components/DeckView'
 import AddDeck from './components/AddDeck'
+import QuizView from './components/QuizView'
 import middleware from './middleware'
 
 const Tabs = createBottomTabNavigator(
@@ -63,6 +64,15 @@ const MainNavigator = createStackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'purple',
+      }
+    }
+  },
+  QuizView: {
+    screen: QuizView,
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
