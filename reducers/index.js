@@ -27,7 +27,6 @@ function decks (state = {}, action) {
                     delete newState[deckTitle]
                 }
             }
-            console.log(newState)
             return newState
         default :
             return state

@@ -47,7 +47,6 @@ export function deleteDeckFromStorage(deckId) {
                     delete data[deckTitle]
                 }
             }
-            console.log(data)
             AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
         })
 }
