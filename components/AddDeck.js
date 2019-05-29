@@ -5,7 +5,7 @@ import {
     TextInput,
     StyleSheet,
     KeyboardAvoidingView,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { handleAddDeck } from '../actions';
@@ -17,7 +17,7 @@ class AddDeck extends Component {
 
     onCreateDeck = () => {
         this.props.dispatch(handleAddDeck(this.state.deckTitle))
-        this.setState({deckTitle: ''})
+        this.setState({ deckTitle: '' })
         this.toDeckView()
     }
 
@@ -29,8 +29,10 @@ class AddDeck extends Component {
     }
 
     render() {
+        const { deckTitle } = this.state
+        const disabled = deckTitle === ''
         return (
-            <KeyboardAvoidingView behavior="padding" style={{flex: 1}} enabled>
+            <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} enabled>
                 <View style={styles.container}>
                     <Text style={styles.header}>What is the the title of your new deck?</Text>
                     <TextInput
@@ -41,7 +43,8 @@ class AddDeck extends Component {
                     />
                     <TouchableOpacity
                         onPress={this.onCreateDeck}
-                        style={styles.submitBtn}
+                        style={disabled ? styles.disabledBtn : styles.submitBtn}
+                        disabled={disabled ? true : false}
                     >
                         <Text style={styles.submitBtnText}>Create Deck</Text>
                     </TouchableOpacity>
@@ -77,7 +80,13 @@ const styles = StyleSheet.create({
     submitBtn: {
         backgroundColor: 'purple',
         color: 'white',
-        borderRadius: 5
+        borderRadius: 5,
+    },
+    disabledBtn: {
+        backgroundColor: 'purple',
+        color: 'white',
+        borderRadius: 5,
+        opacity: .5
     },
     submitBtnText: {
         color: 'white',

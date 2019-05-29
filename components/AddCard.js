@@ -35,6 +35,8 @@ class AddCard extends Component {
     }
 
     render() {
+        const { question, answer } = this.state
+        const disabled = question === '' || answer === ''
         return (
             <KeyboardAvoidingView behavior="padding" style={{flex: 1}} enabled>
                 <View style={styles.container}>
@@ -52,7 +54,8 @@ class AddCard extends Component {
                     />
                     <TouchableOpacity
                         onPress={this.onSubmitCard}
-                        style={styles.submitBtn}
+                        style={disabled ? styles.disabledBtn : styles.submitBtn}
+                        disabled={disabled ? true : false}
                     >
                         <Text style={styles.submitBtnText}>Submit</Text>
                     </TouchableOpacity>
@@ -85,6 +88,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: 350,
         width: 300,
+    },
+    disabledBtn: {
+        backgroundColor: 'purple',
+        color: 'white',
+        borderRadius: 5,
+        marginTop: 350,
+        width: 300,
+        opacity: .5,
     },
     submitBtnText: {
         color: 'white',

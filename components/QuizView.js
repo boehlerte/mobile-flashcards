@@ -61,7 +61,7 @@ class QuizView extends Component {
                                     </View>
                                 :   <View>
                                         <Text style={styles.scoreText}>
-                                            {score/numCards * 100}% Correct
+                                            {Math.floor(score/numCards * 100)}% Correct
                                         </Text>
                                         <TouchableOpacity style={styles.restartBtn} onPress={this.restartQuiz}>
                                             <Text style={styles.restartBtnText}>
