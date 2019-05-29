@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
-import { handleDeleteDeck, handleAddDeck } from '../actions';
+import { handleDeleteDeck } from '../actions';
 
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {

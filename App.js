@@ -11,6 +11,7 @@ import DeckView from './components/DeckView'
 import AddDeck from './components/AddDeck'
 import QuizView from './components/QuizView'
 import middleware from './middleware'
+import { setLocalNotification } from './utils/api';
 
 const Tabs = createBottomTabNavigator(
   {
@@ -83,6 +84,10 @@ const MainNavigator = createStackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>

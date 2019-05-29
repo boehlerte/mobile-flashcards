@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import CardView from './CardView';
 import { StackActions } from 'react-navigation'
+import { clearLocalNotification, setLocalNotification } from '../utils/api';
 
 class QuizView extends Component {
     state = {
@@ -26,10 +27,14 @@ class QuizView extends Component {
             currentCard: 0,
             score: 0,
         })
+        clearLocalNotification()
+            .then(setLocalNotification)
     }
 
     backToDeck = () => {
         this.props.navigation.dispatch(StackActions.pop({n: 1}))
+        clearLocalNotification()
+            .then(setLocalNotification)
     }
 
     render() {
